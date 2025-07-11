@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fightstick Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Fightstick Visualizer</h1>
+            <div class="controls">
+                <button id="resetLayout" class="btn">配置リセット</button>
+                <button id="saveCurrentState" class="btn">現在の状態を保存</button>
+                <button id="loadSavedState" class="btn">保存した状態を復元</button>
+                <button id="generateOBS" class="btn">OBS用HTML生成</button>
+            </div>
+        </header>
+
+        <div class="visualizer-container">
+            <div id="visualizer" class="visualizer">
+                <!-- ボタンはJavaScriptで動的に生成 -->
+            </div>
+        </div>
+
+        <div class="status">
+            <div class="input-status">
+                <span>キーボード入力: <span id="keyboardStatus">待機中</span></span>
+                <span>コントローラー入力: <span id="gamepadStatus">未接続</span></span>
+            </div>
+            <div class="help-text">
+                <p><strong>操作方法:</strong></p>
+                <p>• <strong>左クリック</strong>: コントローラーボタンを割り当て（3秒以内にコントローラーボタンを押す）</p>
+                <p>• <strong>ドラッグ</strong>: ボタンを移動</p>
+            </div>
+            <div class="debug-panel">
+                <button id="toggleDebug" class="btn-small">デバッグ情報表示</button>
+                <button id="testGamepad" class="btn-small">コントローラーテスト</button>
+                <button id="refreshGamepads" class="btn-small">コントローラー再検出</button>
+                <div id="debugInfo" class="debug-info" style="display: none;">
+                    <h3>コントローラー情報</h3>
+                    <div id="gamepadDebug"></div>
+                </div>
+            </div>
+        </div>
+        <div id="notification" class="notification" style="display:none;"></div>
+    </div>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,444 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 24px;
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #764ba2 0%, #667eea 100%);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.visualizer-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: 600px;
+    position: relative;
+}
+
+.visualizer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 540px;
+}
+
+.fightstick-button {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    background: linear-gradient(145deg, #2a2a3e, #1a1a2e);
+    cursor: move;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    user-select: none;
+    z-index: 10;
+}
+
+.fightstick-button:hover {
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.fightstick-button.active {
+    background: linear-gradient(145deg, #ff6b6b, #ee5a24);
+    border-color: #ff6b6b;
+    transform: scale(1.15);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+}
+
+/* 方向ボタンの個別色指定を削除し、アクションボタンと同じに */
+.fightstick-button.direction {
+    background: linear-gradient(145deg, #2a2a3e, #1a1a2e);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+.fightstick-button.direction.up {
+    width: 80px;
+    height: 80px;
+    font-size: 14px;
+    /* 色は共通化 */
+}
+.fightstick-button.direction:hover {
+    background: linear-gradient(145deg, #2a2a3e, #1a1a2e);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+.fightstick-button.direction.active {
+    background: linear-gradient(145deg, #ff6b6b, #ee5a24);
+    border-color: #ff6b6b;
+}
+
+.delete-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    background: #ff4757;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 20;
+}
+
+.fightstick-button:hover .delete-btn {
+    opacity: 1;
+}
+
+.delete-btn:hover {
+    background: #ff3742;
+    transform: scale(1.1);
+}
+
+.status {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.input-status {
+    display: flex;
+    justify-content: space-around;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.input-status span {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.help-text {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.help-text p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #cccccc;
+}
+
+.help-text strong {
+    color: #4ecdc4;
+}
+
+/* デバッグパネル */
+.debug-panel {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.debug-info {
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.debug-info h3 {
+    color: #4ecdc4;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.gamepad-debug-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gamepad-debug-item h4 {
+    color: #ff6b6b;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.gamepad-debug-item p {
+    margin: 5px 0;
+    font-size: 12px;
+    color: #cccccc;
+}
+
+.gamepad-debug-item strong {
+    color: #4ecdc4;
+}
+
+.button-states, .axis-states {
+    margin-top: 10px;
+}
+
+.button-states h5, .axis-states h5 {
+    color: #ffd700;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.button-state, .axis-state {
+    display: inline-block;
+    margin: 2px 5px 2px 0;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    font-size: 11px;
+    color: #ffffff;
+}
+
+.button-state.pressed {
+    background: rgba(255, 107, 107, 0.6);
+    color: #ffffff;
+}
+
+.assignment-info {
+    margin-top: 10px;
+}
+
+.assignment-info h5 {
+    color: #ffd700;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.assignment-info div {
+    font-size: 11px;
+    color: #cccccc;
+    margin: 2px 0;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.focus-debug-info {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.focus-debug-info h4 {
+    color: #4ecdc4;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.focus-debug-info p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.focus-debug-info strong {
+    color: #ff6b6b;
+}
+
+
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .controls {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .input-status {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+
+}
+
+/* ドラッグ中のスタイル */
+.fightstick-button.dragging {
+    transition: none !important;
+}
+
+/* アニメーション */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.fightstick-button.pulse {
+    animation: pulse 0.3s ease;
+}
+
+/* コントローラー入力待機状態 */
+.fightstick-button.waiting-for-input {
+    background: linear-gradient(145deg, #ffd700, #ffed4e) !important;
+    border-color: #ffd700 !important;
+    animation: waitingPulse 1s infinite;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
+@keyframes waitingPulse {
+    0% { 
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    }
+    50% { 
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+    }
+    100% { 
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    }
+}
+
+/* 通知スタイル */
+.notification {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 220px;
+    max-width: 90vw;
+    background: rgba(40,40,60,0.95);
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    z-index: 1000;
+    display: none;
+    animation: notificationSlideIn 0.4s;
+}
+.notification-success { background: linear-gradient(90deg, #4ecdc4, #45b7d1); color: #fff; }
+.notification-error { background: linear-gradient(90deg, #ff6b6b, #ee5a24); color: #fff; }
+.notification-info { background: linear-gradient(90deg, #667eea, #764ba2); color: #fff; }
+
+@keyframes notificationSlideIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(-30px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.debug-info {
+    background: rgba(30,30,50,0.95);
+    color: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 12px;
+    font-size: 14px;
+    max-height: 350px;
+    overflow-y: auto;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+}
+
+.btn-small {
+    padding: 6px 12px;
+    background: linear-gradient(45deg, #45b7d1 0%, #4ecdc4 100%);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 8px;
+    transition: all 0.3s ease;
+}
+.btn-small:hover {
+    background: linear-gradient(45deg, #4ecdc4 0%, #45b7d1 100%);
+} 

@@ -67,56 +67,11 @@
 
 ### OBSがver.31.0.0以降の方
 1. OBSのプロパティからショートカットタブを選択
-2. リンク先欄の内容を`"C:\Program Files\obs-studio\bin\64bit\obs64.exe" --disable-features=EnableWindowsGamingInputDataFetcher`に変更し、保存
+2. リンク先欄の内容を`"C:\...\obs64.exe" --disable-features=EnableWindowsGamingInputDataFetcher`に変更し、保存
     - 引用符の後に` --disable-features=EnableWindowsGamingInputDataFetcher`
     - ※半角スペースが必要
 3. 変更したショートカットからOBSを起動
     - Fightstick Visualizerを使用する場合は必ず変更したショートカットからOBSを起動してください。
-
-## アーキテクチャ
-
-### クラス構造
-コードは以下のクラスに分割されており、各クラスが特定の責任を持っています：
-
-- **`FightstickVisualizer`**: メインクラス、各マネージャーを統合・初期化
-- **`ButtonManager`**: ボタン生成・配置・削除・ドラッグ移動・状態保存/復元
-- **`InputManager`**: ゲームパッド入力の検出、割り当て、アクティブ化/非アクティブ化
-- **`GamepadManager`**: Gamepad APIの監視・ポーリング・接続/切断イベント・デバッグ情報
-- **`StateManager`**: localStorageへの保存・復元、OBS用HTML生成
-- **`UIManager`**: UI更新・通知表示・デバッグ情報表示・ステータス管理
-
-### データフロー
-1. **初期化**: 保存データがあれば復元、なければ初期ボタン生成
-2. **入力検出**: ゲームパッド入力をリアルタイム検出
-3. **状態更新**: 入力に応じてボタンのアクティブ状態を更新
-4. **自動保存**: 設定変更時にlocalStorageに自動保存
-5. **OBS連携**: 設定内容でOBS用HTMLを生成
-
-## ファイル構成
-
-```
-fightstick_visualizer/
-├── index.html          # メインHTMLファイル
-├── style.css           # スタイルシート
-├── script.js           # JavaScript機能（クラスベース）
-└── README.md           # このファイル
-```
-
-## 技術仕様
-
-- **HTML5**: モダンなWeb標準
-- **CSS3**: グラデーション、アニメーション、レスポンシブデザイン
-- **JavaScript ES6+**: クラスベースの実装、Gamepad API
-- **localStorage**: 設定の永続化
-- **Gamepad API**: コントローラー入力検出
-- **requestAnimationFrame**: パフォーマンス最適化
-
-## 対応ブラウザ
-
-- Chrome 67+
-- Firefox 59+
-- Safari 14+
-- Edge 79+
 
 ## カスタマイズ
 
